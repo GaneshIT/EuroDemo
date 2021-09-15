@@ -10,12 +10,40 @@ namespace MyFirstConsoleApp
 {
     class Program
     {
+       //var1  interest =6  main()
+       // var1     interest = 8   getemployeefun()
         static void Main(string[] args)
-        {          
-            MobileServices mobileServices = new MobileServices();
-            mobileServices.ServiceTypes();
-            Mobile objmobile = new Mobile();
-            objmobile.MobileModels("");
+        {
+            Mobile mobile = new Mobile();
+            Samsung samsung = new Samsung();
+            Airtel airtel = new Airtel();
+            airtel.showRecords();
+            //int a = 10;
+            //string b = a.ToString();
+
+            //string c = "10";
+            //object d = c;
+
+            //int x = 20;
+            //object xx = 20;       //boxing- value type to ref
+
+            //int value =Convert.ToInt32(xx);  //unboxing- ref to value
+
+            //float m = 20;
+            //object mm = m;
+
+
+
+            //EmployeeCompensation objemp = new EmployeeCompensation();
+            //objemp.EmployeeBonus();
+            //int interest;
+            //EmployeeCompensation.GetEmployeeInterest(out interest);
+            //Console.WriteLine(interest);
+            //EmployeeCompensation.EmployeeDept("IT", "Sales", "Production","Stock",10);
+            //MobileServices mobileServices = new MobileServices();
+            //mobileServices.ServiceTypes();
+            //Mobile objmobile = new Mobile();
+            //objmobile.MobileModels("");
 
             //FileHandling objFile = new FileHandling();
 
