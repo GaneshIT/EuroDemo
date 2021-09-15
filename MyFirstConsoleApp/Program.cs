@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using MobileLibrary;
 
 
 namespace MyFirstConsoleApp
@@ -11,15 +11,19 @@ namespace MyFirstConsoleApp
     class Program
     {
         static void Main(string[] args)
-        {
+        {          
+            MobileServices mobileServices = new MobileServices();
+            mobileServices.ServiceTypes();
+            Mobile objmobile = new Mobile();
+            objmobile.MobileModels("");
 
-            FileHandling objFile = new FileHandling();
+            //FileHandling objFile = new FileHandling();
 
-             //string msg= objFile.WriteFile();
+            // //string msg= objFile.WriteFile();
 
-            //Console.WriteLine(msg);
-            Console.WriteLine("***********");
-            Console.WriteLine(objFile.ReadFile());
+            ////Console.WriteLine(msg);
+            //Console.WriteLine("***********");
+            //Console.WriteLine(objFile.ReadFile());
             //string a = null;
             //Console.WriteLine(Convert.ToInt32(a));
             //Convert.ToString(objFile.ReadFile());
@@ -41,3 +45,5 @@ namespace MyFirstConsoleApp
         }
     }
 }
+
+//dll files
