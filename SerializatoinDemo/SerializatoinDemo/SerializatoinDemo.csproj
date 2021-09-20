@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{B0825449-9EB5-4535-B47C-CD4399618E60}</ProjectGuid>
+    <ProjectGuid>{FA11B6C8-AE78-4981-A3FC-9396497FD3FA}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>MyFirstConsoleApp</RootNamespace>
-    <AssemblyName>MyFirstConsoleApp</AssemblyName>
+    <RootNamespace>SerializatoinDemo</RootNamespace>
+    <AssemblyName>SerializatoinDemo</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -33,10 +33,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="MobileLibrary, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\MobileLibrary\bin\Debug\MobileLibrary.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -47,15 +43,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DelegateDemo.cs" />
-    <Compile Include="EmployeeCompensation.cs" />
-    <Compile Include="FileHandling.cs" />
-    <Compile Include="GenericsDemo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SerializeDll\SerializeDll.csproj">
+      <Project>{db8ebe9d-56cb-4b22-b267-d38f108ff633}</Project>
+      <Name>SerializeDll</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -8,16 +8,62 @@ using MobileLibrary;
 
 namespace MyFirstConsoleApp
 {
+    public delegate bool FilterDelegate(Person p);
     class Program
     {
        //var1  interest =6  main()
        // var1     interest = 8   getemployeefun()
         static void Main(string[] args)
         {
-            Mobile mobile = new Mobile();
-            Samsung samsung = new Samsung();
-            Airtel airtel = new Airtel();
-            airtel.showRecords();
+            //genericsdemo
+            //bool result = Calculator.AreEqual<int,string>(20, "30");
+            ////result = Calculator.AreEqual<string>("20", "30");
+            //Console.WriteLine(result);
+
+            //delegatesdemo
+            //Employee emp1 = new Employee()
+            //{
+            //    ID = 1,
+            //    Name = "Raj",
+            //    Experience = 2,
+            //    Gender = "M",
+            //    Salary = 4000
+            //};
+            //Employee emp2 = new Employee()
+            //{
+            //    ID = 2,
+            //    Name = "vasu",
+            //    Experience = 4,
+            //    Gender = "M",
+            //    Salary = 7000
+            //};
+            //Employee emp3 = new Employee()
+            //{
+            //    ID = 3,
+            //    Name = "Vinitha",
+            //    Experience = 3,
+            //    Gender = "F",
+            //    Salary = 8000
+            //};
+
+            
+
+            //List<Employee> lstemployees = new List<Employee>();
+            //lstemployees.Add(emp1);
+            //lstemployees.Add(emp2);
+            //lstemployees.Add(emp3);
+
+            //EligbleToPromotion eligbleToPromotion = new EligbleToPromotion(Program.Promote);
+            //Employee.PromoteEmployee(lstemployees, eligbleToPromotion);
+
+            //customer objcust = new customer();
+            //List<customer> lstcustomers = new List<customer>();
+            //Employee.data(objcust, emp1, lstcustomers, lstemployees);
+
+            //Mobile mobile = new Mobile();
+            //Samsung samsung = new Samsung();
+            //Airtel airtel = new Airtel();
+            //airtel.showRecords();
             //int a = 10;
             //string b = a.ToString();
 
@@ -70,6 +116,29 @@ namespace MyFirstConsoleApp
             ////ctrl k+u
             ///
             Console.Read();
+        }
+        
+        public static bool Promote(Employee employee)
+        {
+            if (employee.Salary > 5000)
+                return true;
+            else
+                return false;
+        }
+
+        static void DisplayPeople(string title, List<Person> people, FilterDelegate filter)
+        {
+            Console.WriteLine(title);
+
+            foreach (Person p in people)
+            {
+                if (filter(p))
+                {
+                    Console.WriteLine("{0}, {1} years old", p.Name, p.Age);
+                }
+            }
+
+            Console.Write("\n\n");
         }
     }
 }
