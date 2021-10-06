@@ -16,7 +16,9 @@
                 <tr>
                     <td>Salesman name</td>
                     <td>
-                        <asp:TextBox ID="txtSalesmanname" runat="server" Font-Bold="True" Font-Italic="True"></asp:TextBox></td>
+                        <asp:TextBox ID="txtSalesmanname" runat="server" Font-Bold="True" Font-Italic="True"></asp:TextBox>
+                        <asp:Label ID="lblSalesmanid" runat="server"></asp:Label>
+                    </td>
                 </tr>
                 <tr>
                     <td>Salesman city</td>
@@ -32,6 +34,7 @@
                     <td></td>
                     <td>
                         <asp:Button ID="btnSave" runat="server" Text="Save" OnClick="btnSave_Click" />
+                        <asp:Button ID="btnupdate" runat="server" OnClick="btnupdate_Click" Text="Update" />
                         <asp:Button ID="btnReset" runat="server" Text="Reset" OnClick="btnReset_Click" />                      
                     </td>
                 </tr>
@@ -41,42 +44,28 @@
                 </tr>
             </table>
             <div>
-                <asp:GridView ID="gvSalesmanDetails" runat="server"></asp:GridView>
+                <asp:GridView ID="gvSalesmanDetails" runat="server" AutoGenerateColumns="false" OnRowCommand="gvSalesmanDetails_RowCommand" OnRowDeleting="gvSalesmanDetails_RowDeleting" OnRowEditing="gvSalesmanDetails_RowEditing">
+                    <Columns>
+                        <asp:BoundField DataField="salesman_id" HeaderText="Salesman Id" />
+                        <asp:BoundField DataField="name" HeaderText="Salesman Name" />
+                        <asp:BoundField DataField="city" HeaderText="City" />
+                        <asp:BoundField DataField="commission" HeaderText="Commission" />
+                        <asp:TemplateField HeaderText="Edit">
+                            <ItemTemplate>
+                                <asp:LinkButton ID="lbtnEdit" runat="server" CommandName="Edit" CommandArgument='<%# Eval("salesman_id") %>'>Edit</asp:LinkButton>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="Delete">
+                            <ItemTemplate>
+                                <asp:LinkButton ID="lbtnDelete" runat="server" CommandName="Delete" CommandArgument='<%# Eval("salesman_id") %>'>Delete</asp:LinkButton>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                    </Columns>
+                </asp:GridView>
+                <br />
+                <br />
             </div>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Salesman Id
-                        </th>
-                        <th>Salesman name
-                        </th>
-                        <th>Salesman city
-                        </th>
-                        <th>Salesman commission
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>abc</td>
-                        <td>Blr</td>
-                        <td>100000</td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>abc</td>
-                        <td>Blr</td>
-                        <td>100000</td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>abc</td>
-                        <td>Blr</td>
-                        <td>100000</td>
-                    </tr>
-                </tbody>
-            </table>
+            
         </div>
     </form>
 </body>

@@ -20,7 +20,11 @@ namespace OrderManagementApp
         }
         public void UpdateSalesman(int salesmanId,string salesmanName, string city, string commision)
         {
-
+            SqlConnection sqlConnection = new SqlConnection("Data Source = W10JQQGN13; Initial Catalog = ProductDb; Integrated Security = True");
+            SqlCommand sqlCommand = new SqlCommand("update salesman set name='" + salesmanName + "' , city='" + city + "' , commission=" + commision + " where salesman_id="+salesmanId+"", sqlConnection);
+            sqlConnection.Open();
+            sqlCommand.ExecuteNonQuery();
+            sqlConnection.Close();
         }
         public void DeleteSalesmanById(int salesmanId)
         {
@@ -37,9 +41,16 @@ namespace OrderManagementApp
             sqlConnection.Close();
             return dt;
         }
-        public void GetSalesmanById(int salesmanId)
+        public DataTable GetSalesmanById(int salesmanId)
         {
-
+            SqlConnection sqlConnection = new SqlConnection("Data Source = W10JQQGN13; Initial Catalog = ProductDb; Integrated Security = True");
+            SqlCommand sqlCommand = new SqlCommand("select * from salesman where salesman_id="+salesmanId+"", sqlConnection);
+            sqlConnection.Open();
+            SqlDataReader dr = sqlCommand.ExecuteReader();
+            DataTable dt = new DataTable();
+            dt.Load(dr);
+            sqlConnection.Close();
+            return dt;
         }
 
     }

@@ -33,6 +33,15 @@ namespace OrderManagementApp
         protected global::System.Web.UI.WebControls.TextBox txtSalesmanname;
 
         /// <summary>
+        /// lblSalesmanid control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblSalesmanid;
+
+        /// <summary>
         /// txtSalesmancity control.
         /// </summary>
         /// <remarks>
@@ -58,6 +67,15 @@ namespace OrderManagementApp
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnSave;
+
+        /// <summary>
+        /// btnupdate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnupdate;
 
         /// <summary>
         /// btnReset control.
