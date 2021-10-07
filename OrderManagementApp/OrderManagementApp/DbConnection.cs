@@ -9,7 +9,7 @@ namespace OrderManagementApp
 {
     public class DbConnection
     {
-        
+        #region salesman
         public void InsertSalesman(string salesmanName,string city,string commision)
         {        
             SqlConnection sqlConnection = new SqlConnection("Data Source = W10JQQGN13; Initial Catalog = ProductDb; Integrated Security = True");
@@ -52,9 +52,63 @@ namespace OrderManagementApp
             sqlConnection.Close();
             return dt;
         }
+        public DataTable GetSalesmanIds()
+        {
+            SqlConnection sqlConnection = new SqlConnection("Data Source = W10JQQGN13; Initial Catalog = ProductDb; Integrated Security = True");
+            SqlCommand sqlCommand = new SqlCommand("select salesman_id,name from salesman", sqlConnection);
+            sqlConnection.Open();
+            SqlDataReader dr = sqlCommand.ExecuteReader();
+            DataTable dt = new DataTable();
+            dt.Load(dr);
+            sqlConnection.Close();
+            return dt;
+        }
+        #endregion salesman
 
+        #region customer
+        public string InsertCustomer(int customerid,string name, string city, string grade,int salesmanid)
+        {
+            string insertQuery = "insert into customer values(" + customerid + ",'" + name + "','" + city + "','" + grade + "'," + salesmanid + ")";
+            ExecuteQry(insertQuery);
+            return "Inserted";
+        }
+        public DataTable GetCustomers()
+        {
+            string selectcustomerQry = "select * from customer";
+            DataTable dt = ExecuteQry(selectcustomerQry);
+            return dt;
+        }
+
+        public DataTable ExecuteQry(string query)
+        {
+            SqlConnection sqlConnection = new SqlConnection("Data Source = W10JQQGN13; Initial Catalog = ProductDb; Integrated Security = True");
+            SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(query, sqlConnection);
+            DataTable dt = new DataTable();
+            sqlDataAdapter.Fill(dt);
+            return dt;
+        }
+        /*
+         * create proc myproc
+         * select * from customer
+         * select * from salesman
+         * select * from orders
+         * 
+         * exec myproc
+         */
+        //datatable and dataset
+        //dataset contains tables
+        //datatable contains rows&colmns
+        //public DataTable ExecuteQry(string query)
+        //{
+        //    SqlConnection sqlConnection = new SqlConnection("Data Source = W10JQQGN13; Initial Catalog = ProductDb; Integrated Security = True");
+        //    SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(query, sqlConnection);
+        //    DataTable dt = new DataTable();
+        //    sqlDataAdapter.Fill(dt);
+        //    return dt;
+        //}
+        #endregion
     }
-    
+
 }
 /*Classes
  *Sqlconnection - connection establishment between sql and .net

@@ -54,7 +54,7 @@ namespace OrderManagementApp
             }
             else
             {
-
+                
             }
         }
 
@@ -72,6 +72,7 @@ namespace OrderManagementApp
         {
             DbConnection dbConnection = new DbConnection();
             dbConnection.UpdateSalesman(Convert.ToInt32(lblSalesmanid.Text), txtSalesmanname.Text, txtSalesmancity.Text, txtSalesmancommision.Text);
+           
             DataTable dtSalesmanResult = dbConnection.GetSalesmans();
             gvSalesmanDetails.DataSource = dtSalesmanResult;
             gvSalesmanDetails.DataBind();
