@@ -1,0 +1,244 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="ProductDbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="customer">
+          <Key>
+            <PropertyRef Name="customer_id" />
+          </Key>
+          <Property Name="customer_id" Type="int" Nullable="false" />
+          <Property Name="cust_name" Type="varchar" MaxLength="100" />
+          <Property Name="city" Type="varchar" MaxLength="100" />
+          <Property Name="grade" Type="varchar" MaxLength="100" />
+          <Property Name="salesman_id" Type="int" />
+        </EntityType>
+        <EntityType Name="orders">
+          <Key>
+            <PropertyRef Name="ord_no" />
+          </Key>
+          <Property Name="ord_no" Type="int" Nullable="false" />
+          <Property Name="purch_amt" Type="decimal" Precision="10" Scale="1" />
+          <Property Name="ord_date" Type="date" />
+          <Property Name="customer_id" Type="int" />
+          <Property Name="salesman_id" Type="int" />
+        </EntityType>
+        <EntityType Name="salesman">
+          <Key>
+            <PropertyRef Name="salesman_id" />
+          </Key>
+          <Property Name="salesman_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="100" />
+          <Property Name="City" Type="varchar" MaxLength="100" />
+          <Property Name="Commission" Type="decimal" Precision="4" Scale="2" />
+        </EntityType>
+        <Association Name="FK__customer__salesm__300424B4">
+          <End Role="salesman" Type="Self.salesman" Multiplicity="0..1" />
+          <End Role="customer" Type="Self.customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="salesman">
+              <PropertyRef Name="salesman_id" />
+            </Principal>
+            <Dependent Role="customer">
+              <PropertyRef Name="salesman_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__orders__customer__36B12243">
+          <End Role="customer" Type="Self.customer" Multiplicity="0..1" />
+          <End Role="orders" Type="Self.orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="customer">
+              <PropertyRef Name="customer_id" />
+            </Principal>
+            <Dependent Role="orders">
+              <PropertyRef Name="customer_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__orders__salesman__37A5467C">
+          <End Role="salesman" Type="Self.salesman" Multiplicity="0..1" />
+          <End Role="orders" Type="Self.orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="salesman">
+              <PropertyRef Name="salesman_id" />
+            </Principal>
+            <Dependent Role="orders">
+              <PropertyRef Name="salesman_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ProductDbModelStoreContainer">
+          <EntitySet Name="customer" EntityType="Self.customer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="orders" EntityType="Self.orders" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="salesman" EntityType="Self.salesman" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__customer__salesm__300424B4" Association="Self.FK__customer__salesm__300424B4">
+            <End Role="salesman" EntitySet="salesman" />
+            <End Role="customer" EntitySet="customer" />
+          </AssociationSet>
+          <AssociationSet Name="FK__orders__customer__36B12243" Association="Self.FK__orders__customer__36B12243">
+            <End Role="customer" EntitySet="customer" />
+            <End Role="orders" EntitySet="orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK__orders__salesman__37A5467C" Association="Self.FK__orders__salesman__37A5467C">
+            <End Role="salesman" EntitySet="salesman" />
+            <End Role="orders" EntitySet="orders" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ProductDbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="customer">
+          <Key>
+            <PropertyRef Name="customer_id" />
+          </Key>
+          <Property Name="customer_id" Type="Int32" Nullable="false" />
+          <Property Name="cust_name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="city" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="grade" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="salesman_id" Type="Int32" />
+          <NavigationProperty Name="salesman" Relationship="Self.FK__customer__salesm__300424B4" FromRole="customer" ToRole="salesman" />
+          <NavigationProperty Name="orders" Relationship="Self.FK__orders__customer__36B12243" FromRole="customer" ToRole="orders" />
+        </EntityType>
+        <EntityType Name="order">
+          <Key>
+            <PropertyRef Name="ord_no" />
+          </Key>
+          <Property Name="ord_no" Type="Int32" Nullable="false" />
+          <Property Name="purch_amt" Type="Decimal" Precision="10" Scale="1" />
+          <Property Name="ord_date" Type="DateTime" Precision="0" />
+          <Property Name="customer_id" Type="Int32" />
+          <Property Name="salesman_id" Type="Int32" />
+          <NavigationProperty Name="customer" Relationship="Self.FK__orders__customer__36B12243" FromRole="orders" ToRole="customer" />
+          <NavigationProperty Name="salesman" Relationship="Self.FK__orders__salesman__37A5467C" FromRole="orders" ToRole="salesman" />
+        </EntityType>
+        <EntityType Name="salesman">
+          <Key>
+            <PropertyRef Name="salesman_id" />
+          </Key>
+          <Property Name="salesman_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="City" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Commission" Type="Decimal" Precision="4" Scale="2" />
+          <NavigationProperty Name="customers" Relationship="Self.FK__customer__salesm__300424B4" FromRole="salesman" ToRole="customer" />
+          <NavigationProperty Name="orders" Relationship="Self.FK__orders__salesman__37A5467C" FromRole="salesman" ToRole="orders" />
+        </EntityType>
+        <Association Name="FK__customer__salesm__300424B4">
+          <End Role="salesman" Type="Self.salesman" Multiplicity="0..1" />
+          <End Role="customer" Type="Self.customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="salesman">
+              <PropertyRef Name="salesman_id" />
+            </Principal>
+            <Dependent Role="customer">
+              <PropertyRef Name="salesman_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__orders__customer__36B12243">
+          <End Role="customer" Type="Self.customer" Multiplicity="0..1" />
+          <End Role="orders" Type="Self.order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="customer">
+              <PropertyRef Name="customer_id" />
+            </Principal>
+            <Dependent Role="orders">
+              <PropertyRef Name="customer_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__orders__salesman__37A5467C">
+          <End Role="salesman" Type="Self.salesman" Multiplicity="0..1" />
+          <End Role="orders" Type="Self.order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="salesman">
+              <PropertyRef Name="salesman_id" />
+            </Principal>
+            <Dependent Role="orders">
+              <PropertyRef Name="salesman_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ProductDbEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="customers" EntityType="Self.customer" />
+          <EntitySet Name="orders" EntityType="Self.order" />
+          <EntitySet Name="salesmen" EntityType="Self.salesman" />
+          <AssociationSet Name="FK__customer__salesm__300424B4" Association="Self.FK__customer__salesm__300424B4">
+            <End Role="salesman" EntitySet="salesmen" />
+            <End Role="customer" EntitySet="customers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__orders__customer__36B12243" Association="Self.FK__orders__customer__36B12243">
+            <End Role="customer" EntitySet="customers" />
+            <End Role="orders" EntitySet="orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK__orders__salesman__37A5467C" Association="Self.FK__orders__salesman__37A5467C">
+            <End Role="salesman" EntitySet="salesmen" />
+            <End Role="orders" EntitySet="orders" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ProductDbModelStoreContainer" CdmEntityContainer="ProductDbEntities">
+          <EntitySetMapping Name="customers">
+            <EntityTypeMapping TypeName="ProductDbModel.customer">
+              <MappingFragment StoreEntitySet="customer">
+                <ScalarProperty Name="customer_id" ColumnName="customer_id" />
+                <ScalarProperty Name="cust_name" ColumnName="cust_name" />
+                <ScalarProperty Name="city" ColumnName="city" />
+                <ScalarProperty Name="grade" ColumnName="grade" />
+                <ScalarProperty Name="salesman_id" ColumnName="salesman_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="orders">
+            <EntityTypeMapping TypeName="ProductDbModel.order">
+              <MappingFragment StoreEntitySet="orders">
+                <ScalarProperty Name="ord_no" ColumnName="ord_no" />
+                <ScalarProperty Name="purch_amt" ColumnName="purch_amt" />
+                <ScalarProperty Name="ord_date" ColumnName="ord_date" />
+                <ScalarProperty Name="customer_id" ColumnName="customer_id" />
+                <ScalarProperty Name="salesman_id" ColumnName="salesman_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="salesmen">
+            <EntityTypeMapping TypeName="ProductDbModel.salesman">
+              <MappingFragment StoreEntitySet="salesman">
+                <ScalarProperty Name="salesman_id" ColumnName="salesman_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Commission" ColumnName="Commission" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

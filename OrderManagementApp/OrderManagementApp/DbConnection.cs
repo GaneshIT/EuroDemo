@@ -119,3 +119,24 @@ namespace OrderManagementApp
  *ExecuteNonQuery() - execute sql commands -insert,update,delete,
  *ExecutreReader() - execute select commands
  */
+
+
+
+/*
+ * Entity Framework
+ * Open-source object-relational mapping (ORM) Framework for .NET applications
+ * 
+ * SQL Table: columns(SalesmanId,Name,City,Commission)
+ * 
+ * 
+ * C#:Model-> class salesman{
+ * int salesmaneid
+ * string name
+ * string city
+ * double commission
+ * }
+ * 
+ * 1.Database first approach
+ * 2.code first approach
+ */
+

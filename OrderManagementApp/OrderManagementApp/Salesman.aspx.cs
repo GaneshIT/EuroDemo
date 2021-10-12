@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Data.Entity;
 
 namespace OrderManagementApp
 {
@@ -33,6 +34,20 @@ namespace OrderManagementApp
 
             gvSalesmanDetails.DataSource = dtSalesmanResult;
             gvSalesmanDetails.DataBind();
+
+            ////Entity framework demo
+            ////ProductDbEntities productDbEntities = new ProductDbEntities();
+            //OrderManagementDataLayer.ProductDbContext productDbContext = new OrderManagementDataLayer.ProductDbContext();
+            ////constructor invoke -> db connection establishment
+            //var result = productDbContext.salesmen.ToList();
+            ////insert salesmane
+            //OrderManagementDataLayer.Salesman salesman = new OrderManagementDataLayer.Salesman();
+            //salesman.name = txtSalesmanname.Text;
+            //salesman.city = txtSalesmancity.Text;
+            //salesman.Commission =Convert.ToDecimal(txtSalesmancommision.Text);
+            //productDbContext.salesmen.Add(salesman);
+            //productDbContext.SaveChanges();
+
         }
 
         protected void btnReset_Click(object sender, EventArgs e)
@@ -76,6 +91,11 @@ namespace OrderManagementApp
             DataTable dtSalesmanResult = dbConnection.GetSalesmans();
             gvSalesmanDetails.DataSource = dtSalesmanResult;
             gvSalesmanDetails.DataBind();
+        }
+
+        protected void btnorderentry_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Orders.aspx");
         }
     }  
 }
