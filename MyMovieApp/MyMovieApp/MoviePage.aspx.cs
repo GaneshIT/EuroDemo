@@ -6,11 +6,14 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data.Entity;
 using MyMovieData;
+using MyMovieBusiness;
+using System.Data;
 
 namespace MyMovieApp
 {
     public partial class MoviePage : System.Web.UI.Page
     {
+        MyMovie MyMovieObj = new MyMovie();
         protected void Page_Load(object sender, EventArgs e)
         {
 
@@ -18,14 +21,19 @@ namespace MyMovieApp
 
         protected void btnSave_Click(object sender, EventArgs e)
         {
-            MyMovieEntities myMovieEntities = new MyMovieEntities();
+            //MyMovieEntities myMovieEntities = new MyMovieEntities();
             movie movieObj = new movie();
             movieObj.Name = txtMoviename.Text;
             movieObj.MovieType = txtMovieType.Text;
             movieObj.MovieDesc = txtMovieDesc.Text;
-            myMovieEntities.movies.Add(movieObj);
-            myMovieEntities.SaveChanges();
-            lblResult.Text = "Movied added successfully!!!";
+            //myMovieEntities.movies.Add(movieObj);
+            //myMovieEntities.SaveChanges();
+            //lblResult.Text = "Movied added successfully!!!";
+            string msg = MyMovieObj.InsertMovie(movieObj);
+            lblResult.Text = msg;
+            DataTable dtMovies = MyMovieObj.SelectMovies();
+            gvMovieDetails.DataSource = dtMovies;
+            gvMovieDetails.DataBind();
         }
 
         protected void btnEdit_Click(object sender, EventArgs e)
@@ -79,3 +87,7 @@ namespace MyMovieApp
         }
     }
 }
+
+/*
+ * 2, 3, N Layers 
+ */

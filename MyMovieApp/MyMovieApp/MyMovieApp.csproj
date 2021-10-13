@@ -239,6 +239,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\MyMovieBusiness\MyMovieBusiness.csproj">
+      <Project>{4a5730ba-7d63-4e1d-9379-b2a39b291f49}</Project>
+      <Name>MyMovieBusiness</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MyMovieData\MyMovieData.csproj">
       <Project>{2a63947c-31c4-4646-8136-272dce9031d7}</Project>
       <Name>MyMovieData</Name>

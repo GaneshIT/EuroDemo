@@ -40,6 +40,9 @@
                         <asp:Label ID="lblResult" runat="server" Text=""></asp:Label>
                     </td>
                 </tr>
+                <tr><td colspan="2">
+                    <asp:GridView ID="gvMovieDetails" runat="server"></asp:GridView>
+                    </td></tr>
                 <tr>
                     <td>
                         Movie Id

@@ -10,7 +10,6 @@
 
 namespace MyMovieApp
 {
-    public partial class About
-    {
-    }
+    public partial class About { }
+
 }
